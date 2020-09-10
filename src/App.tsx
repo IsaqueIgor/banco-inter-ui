@@ -1,10 +1,15 @@
 import React from 'react';
 
+import { ThemeProvider } from 'styled-components';
+
+import theme from './styles/themes/light';
+import GlobalStyles from './styles/global';
+
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <h1>Banco Inter</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+    </ThemeProvider>
   );
 };
 
