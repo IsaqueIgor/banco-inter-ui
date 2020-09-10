@@ -8,8 +8,12 @@ import {
 } from './styles';
 import { BancoInter } from '../../assets/images';
 import Button from '../Button';
+import AccountDropdown from './AccountDropdown';
+import { User } from './Header';
 
 const Header: React.FC = () => {
+  const user: User = { name: 'Isaque Igor' };
+
   return (
     <AnimatedContainer>
       <Wrapper>
@@ -19,6 +23,7 @@ const Header: React.FC = () => {
         </AnimatedLeftNav>
         <AnimatedRightNav>
           <Button variant="secondary">Simulador Renda Fixa</Button>
+          <AccountDropdown user={user} />
         </AnimatedRightNav>
       </Wrapper>
     </AnimatedContainer>
