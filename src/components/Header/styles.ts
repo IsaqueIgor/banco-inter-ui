@@ -7,13 +7,12 @@ export const AnimatedContainer = styled(motion.header)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 10.4rem;
   background: ${({ theme }) => theme.colors.background};
   position: relative;
 `;
 
 export const Wrapper = styled.div`
-  max-width: 113rem;
+  max-width: 100rem;
   height: 10.4rem;
   width: 100%;
   display: flex;

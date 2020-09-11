@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import {
   AnimatedContainer,
@@ -10,6 +10,7 @@ import { BancoInter } from '../../assets/images';
 import Button from '../Button';
 import AccountDropdown from './AccountDropdown';
 import { User } from './Header';
+import Gradient from '../Gradient';
 
 const Header: React.FC = () => {
   const user: User = { name: 'Isaque Igor' };
@@ -26,7 +27,8 @@ const Header: React.FC = () => {
           <AccountDropdown user={user} />
         </AnimatedRightNav>
       </Wrapper>
+      <Gradient />
     </AnimatedContainer>
   );
 };
-export default Header;
+export default memo(Header);
