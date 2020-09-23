@@ -11,22 +11,22 @@ import {
 import { BoletoIcon } from '../assets/images/icons';
 
 export default {
-  Transferência: {
+  Tranferring: {
     icon: <FiRepeat />,
   },
-  Pagamentos: {
+  Payments: {
     icon: <BoletoIcon />,
   },
-  Investimentos: {
+  Investments: {
     icon: <FiBarChart2 />,
   },
-  Cartões: {
+  Cards: {
     icon: <FiCreditCard />,
   },
   'Gift Card': {
     icon: <FiGift />,
   },
-  Seguros: {
+  Insurances: {
     icon: <FiUmbrella />,
   },
 } as const;
