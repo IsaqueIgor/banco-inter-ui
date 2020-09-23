@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
+import BalanceSecret from './BalanceSecret';
 import { Container, Balance } from './styles';
 import Button from '../../../../components/Button';
 
@@ -14,10 +15,11 @@ const AccountBalance: React.FC = () => {
     <Container>
       <Balance>
         <span>Saldo em Conta:</span>
-        <AnimatePresence />
+        <AnimatePresence>
+          {isHidden && <BalanceSecret setIsValueVisible={setIsValueVisible} />}
+        </AnimatePresence>
         <div>
-          R$
-          <strong>---</strong>
+          R$<strong>{isValueVisible ? '765,59' : '---'}</strong>
         </div>
       </Balance>
 
