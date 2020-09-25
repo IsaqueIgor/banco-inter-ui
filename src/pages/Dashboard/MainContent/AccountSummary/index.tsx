@@ -12,6 +12,8 @@ import {
   DataValue,
 } from './styles';
 import Button from '../../../../components/Button';
+import CreditCardIllustration from '../../../../assets/images/illustrations/card-illustration.png';
+import { PlataformaPaiIcon } from '../../../../assets/images/icons';
 
 const AccountSummary: React.FC = () => {
   const [displayStatement, setDisplayStatement] = useState(true);
@@ -42,6 +44,46 @@ const AccountSummary: React.FC = () => {
             <DataValue outcome>
               {displayStatement ? 'R$ 7.948,55' : '---'}
             </DataValue>
+          </RightData>
+        </DataWrapper>
+      </Card>
+      <Card>
+        <Header iconStroke>
+          <FiCreditCard />
+          <h3>MasterCard 8430</h3>
+        </Header>
+
+        <DataWrapper>
+          <LeftData>
+            <img
+              src={CreditCardIllustration}
+              alt="Cartão de Crédito Sem Anuidade"
+            />
+          </LeftData>
+          <RightData>
+            <span>Seu cartão é MasterCard e sem anuidade!</span>
+          </RightData>
+        </DataWrapper>
+      </Card>
+      <Card>
+        <Header iconStroke={false}>
+          <PlataformaPaiIcon />
+          <h3>Plataforma Aberta Inter</h3>
+          <Button
+            onClick={() => setDisplayInvestments((prevState) => !prevState)}
+            variant="transparent"
+          >
+            {displayInvestments ? <FiEyeOff /> : <FiEye />}
+          </Button>
+        </Header>
+
+        <DataWrapper>
+          <LeftData>Gráfico</LeftData>
+          <RightData>
+            <span>Total investido</span>
+            <DataValue>{displayInvestments ? 'R$ 5.750,00' : '---'}</DataValue>
+            <span>Evolução no mês</span>
+            <DataValue>{displayInvestments ? '20%' : '---'}</DataValue>
           </RightData>
         </DataWrapper>
       </Card>
