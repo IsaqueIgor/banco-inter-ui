@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FiBarChart2 } from 'react-icons/fi';
 
+import { i18n } from '../../../translate/i18n';
 import { Wrapper, AnimatedContainer, AnimatedAmountInvested } from './styles';
 import { sideBarNavigation } from '../../../constants';
 import Accordion from './Accordion';
@@ -27,10 +28,11 @@ const SideBar: React.FC = () => {
           whileHover={{ y: -4, transition: DEFAULT_TRANSITION }}
           whileTap={{ y: 2, transition: DEFAULT_TRANSITION }}
         >
-          Show Invested Amount <FiBarChart2 size="1.6rem" />
+          {i18n.t('investments.showInvestedAmount')}{' '}
+          <FiBarChart2 size="1.6rem" />
         </AnimatedAmountInvested>
         {Object.entries(sideBarNavigation).map(([key, value]) => (
-          <Accordion key={key} icon={value.icon} sectionName={key} />
+          <Accordion key={key} icon={value.icon} sectionName={value.label} />
         ))}
       </AnimatedContainer>
     </Wrapper>

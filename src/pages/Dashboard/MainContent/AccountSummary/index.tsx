@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { FiCreditCard, FiFileText, FiEye, FiEyeOff } from 'react-icons/fi';
 
+import { i18n } from '../../../../translate/i18n';
 import {
   Container,
   Card,
@@ -24,7 +25,7 @@ const AccountSummary: React.FC = () => {
       <Card>
         <Header iconStroke>
           <FiFileText />
-          <h3>Extrato</h3>
+          <h3>{i18n.t('account.extract')}</h3>
           <Button
             onClick={() => setDisplayStatement((prevState) => !prevState)}
             variant="transparent"
@@ -34,13 +35,13 @@ const AccountSummary: React.FC = () => {
         </Header>
 
         <DataWrapper>
-          <LeftData>Gráfico</LeftData>
+          <LeftData>{i18n.t('account.graph')}</LeftData>
           <RightData>
-            <span>Receita</span>
+            <span>{i18n.t('account.revenue')}</span>
             <DataValue income>
               {displayStatement ? 'R$ 8.552,22' : '---'}
             </DataValue>
-            <span>Despesas</span>
+            <span>{i18n.t('account.expenses')}</span>
             <DataValue outcome>
               {displayStatement ? 'R$ 7.948,55' : '---'}
             </DataValue>
@@ -61,7 +62,7 @@ const AccountSummary: React.FC = () => {
             />
           </LeftData>
           <RightData>
-            <span>Seu cartão é MasterCard e sem anuidade!</span>
+            <span>{i18n.t('branding.noAnnuity')}</span>
           </RightData>
         </DataWrapper>
       </Card>
@@ -78,11 +79,11 @@ const AccountSummary: React.FC = () => {
         </Header>
 
         <DataWrapper>
-          <LeftData>Gráfico</LeftData>
+          <LeftData>{i18n.t('account.graph')}</LeftData>
           <RightData>
-            <span>Total investido</span>
+            <span>{i18n.t('investments.investedCapital')}</span>
             <DataValue>{displayInvestments ? 'R$ 5.750,00' : '---'}</DataValue>
-            <span>Evolução no mês</span>
+            <span>{i18n.t('investments.monthPerfomance')}</span>
             <DataValue>{displayInvestments ? '20%' : '---'}</DataValue>
           </RightData>
         </DataWrapper>
