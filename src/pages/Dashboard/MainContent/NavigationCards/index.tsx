@@ -20,7 +20,7 @@ const NavigationCards: React.FC = () => {
             whileTap={{ y: 2, transition: DEFAULT_TRANSITION }}
           >
             <div>{value.icon}</div>
-            {key}
+            {value.label}
           </AnimatedCard>
         ))}
       </Navigation>

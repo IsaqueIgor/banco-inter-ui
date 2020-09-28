@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
+import { i18n } from '../../../../translate/i18n';
 import BalanceSecret from './BalanceSecret';
 import { Container, Balance } from './styles';
 import Button from '../../../../components/Button';
@@ -14,7 +15,7 @@ const AccountBalance: React.FC = () => {
   return (
     <Container>
       <Balance>
-        <span>Saldo em Conta:</span>
+        <span> {i18n.t('account.balance')}:</span>
         <AnimatePresence>
           {isHidden && <BalanceSecret setIsValueVisible={setIsValueVisible} />}
         </AnimatePresence>
