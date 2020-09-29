@@ -117,27 +117,33 @@ export const DataValue = styled.div<DataValueType>`
   `}
 `;
 
-export const CustomTooltip = styled.div`
-  ${({ theme }) => css`
+export const CustomTooltip = styled.div<{ rightArrow?: boolean }>`
+  ${({ theme, rightArrow }) => css`
     background: ${theme.colors.lightGrey};
     padding: 0.4rem 0.8rem;
     border-radius: ${theme.radii.small};
     font-size: ${theme.fontSizes.tiny};
     text-align: center;
     box-shadow: 0 -0.1rem 0.2rem rgba(0, 0, 0, 0.28);
+
     :before {
       content: '';
       display: block;
       height: 0;
-      left: 50%;
+      left: ${rightArrow ? `100%` : `50%`};
       bottom: -50%;
       position: absolute;
-      transform: translate3d(-50%, 25%, 0);
-      border-color: ${theme.colors.lightGrey} transparent transparent
-        transparent;
+      transform: ${rightArrow
+        ? `translate3d(0, -175%, 0)`
+        : `translate3d(-50%, 25%, 0)`};
+      border-color: ${rightArrow
+        ? `transparent transparent transparent ${theme.colors.lightGrey}`
+        : `${theme.colors.lightGrey} transparent transparent
+        transparent`};
       border-style: solid;
       border-width: 0.8rem;
     }
+
     :after {
       content: '';
       display: block;

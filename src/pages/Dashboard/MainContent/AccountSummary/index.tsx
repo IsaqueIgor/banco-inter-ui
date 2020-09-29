@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { ResponsiveLine } from '@nivo/line';
+import { ResponsiveBar } from '@nivo/bar';
 import { FiCreditCard, FiFileText, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useTheme } from 'styled-components';
 
-import lineChartData from '../../../../utils/line-chart-data';
+import { lineChartData, barChartData } from '../../../../utils';
 import { i18n } from '../../../../translate/i18n';
 import {
   Container,
@@ -27,11 +28,12 @@ const formatChartValue = (value: ChartValue): string => `${value || 0}%`;
 const AccountSummary: React.FC = () => {
   const [displayStatement, setDisplayStatement] = useState(true);
   const [displayInvestments, setDisplayInvestments] = useState(true);
-  const [investmentGrowth, setInvestmentGrowth] = useState(() => {
+
+  const investmentGrowth = useMemo(() => {
     const [investments] = lineChartData;
     const { y } = investments.data[investments.data.length - 1];
     return formatChartValue(y);
-  });
+  }, []);
 
   const { colors } = useTheme();
 
@@ -51,45 +53,48 @@ const AccountSummary: React.FC = () => {
 
         <DataWrapper>
           <LeftData>
-            {' '}
-            <ResponsiveLine
-              data={lineChartData}
-              useMesh
-              enableArea
-              enableCrosshair={false}
-              curve="cardinal"
-              margin={{ top: 8, right: 8, bottom: 20, left: 8 }}
-              xScale={{ type: 'point' }}
-              yScale={{
-                type: 'linear',
-                min: 'auto',
-                max: 'auto',
-                stacked: true,
-                reverse: false,
-              }}
-              tooltip={({ point }) => {
-                return (
-                  <CustomTooltip>
-                    {formatChartValue(point.data.yFormatted)}
-                  </CustomTooltip>
-                );
-              }}
+            <ResponsiveBar
+              data={barChartData}
+              indexBy="month"
+              keys={['outcome', 'income']}
+              colors={({ id, data }) => data[`${id}Color`]}
+              margin={{ top: 0, right: -8, bottom: 20, left: -8 }}
+              padding={0.7}
               axisTop={null}
               axisRight={null}
+              axisLeft={null}
               axisBottom={{
-                orient: 'bottom',
                 tickSize: 0,
                 tickPadding: 8,
                 tickRotation: 0,
               }}
-              axisLeft={null}
-              colors={colors.success}
-              lineWidth={1.5}
-              pointSize={8}
-              pointColor={colors.success}
-              pointLabel="y"
-              pointLabelYOffset={-12}
+              tooltip={(chart) => {
+                const label = chart.id === 'income' ? 'Receita' : 'Despesas';
+                const value = chart.data[chart.id];
+                return (
+                  <CustomTooltip rightArrow>
+                    {`${label}: R$${value}`}
+                  </CustomTooltip>
+                );
+              }}
+              theme={{
+                tooltip: {
+                  container: {
+                    background: 'transparent',
+                    boxShadow: 'none',
+                    padding: 0,
+                    borderRadius: 0,
+                  },
+                  tableCell: {
+                    padding: 0,
+                  },
+                },
+              }}
+              animate
+              motionStiffness={90}
+              motionDamping={15}
               enableGridY={false}
+              enableLabel={false}
             />
           </LeftData>
           <RightData>
