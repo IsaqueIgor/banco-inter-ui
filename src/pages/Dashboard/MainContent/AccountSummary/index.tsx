@@ -69,7 +69,10 @@ const AccountSummary: React.FC = () => {
                 tickRotation: 0,
               }}
               tooltip={(chart) => {
-                const label = chart.id === 'income' ? 'Receita' : 'Despesas';
+                const label =
+                  chart.id === 'income'
+                    ? i18n.t('account.revenue')
+                    : i18n.t('account.expenses');
                 const value = chart.data[chart.id];
                 return (
                   <CustomTooltip rightArrow>
