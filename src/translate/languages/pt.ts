@@ -28,6 +28,12 @@ const messages = {
         digitalAccount: 'Conta Digital',
         reports: 'Relatorios',
         safety: 'Segurança',
+        house: 'Casa',
+        entertainment: 'Entreterimento',
+        tecnology: 'Tecnologia',
+        transport: 'Transporte',
+        sport: 'Esporte',
+        requestNow: 'Solicitar Agora',
       },
       monthsAbbrev: {
         jan: 'Jan',
