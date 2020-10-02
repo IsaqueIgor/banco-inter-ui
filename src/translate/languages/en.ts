@@ -28,6 +28,12 @@ const messages = {
         digitalAccount: 'Digital Account',
         reports: 'Reports',
         safety: 'Safety',
+        house: 'House',
+        entertainment: 'Entertainment',
+        tecnology: 'Technology',
+        transport: 'Transport',
+        sport: 'Sport',
+        requestNow: 'Request Now',
       },
       monthsAbbrev: {
         jan: 'Jan',
