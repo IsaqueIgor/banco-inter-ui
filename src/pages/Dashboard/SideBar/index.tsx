@@ -7,6 +7,7 @@ import { Wrapper, AnimatedContainer, AnimatedAmountInvested } from './styles';
 import { sideBarNavigation } from '../../../constants';
 import Accordion from './Accordion';
 import AccountBalance from './AccountBalance';
+import HelpDesk from './HelpDesk';
 
 const DEFAULT_TRANSITION = { type: 'spring', mass: 1.3 };
 
@@ -35,6 +36,7 @@ const SideBar: React.FC = () => {
           <Accordion key={key} icon={value.icon} sectionName={value.label} />
         ))}
       </AnimatedContainer>
+      <HelpDesk />
     </Wrapper>
   );
 };
