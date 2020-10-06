@@ -10,15 +10,19 @@ export const Container = styled.section`
     border-radius: ${theme.radii.default};
     box-shadow: ${theme.shadows.flat};
     padding: 2.4rem;
-    max-height: 34.2rem;
-    height: 100%;
     width: 100%;
+
     > div {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+
       + div {
         margin-top: 2.4rem;
-        height: 100%;
+        display: grid;
+        grid-gap: 2.4rem;
+        grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+        min-height: 18.4rem;
       }
     }
   `}
@@ -31,7 +35,7 @@ export const ShoppingButton = styled(ButtonContainer)`
     max-width: 35.2rem;
     width: 100%;
     border-radius: ${theme.radii.default};
-    flex: 1 0 100%;
+
     svg:first-of-type {
       margin-left: 1.6rem;
     }
@@ -51,11 +55,12 @@ export const ShoppingButton = styled(ButtonContainer)`
 `;
 
 export const Products = styled(Navigation)`
-  ${() => css`
-    flex-grow: 0;
-    grid-template-columns: repeat(5, minmax(6.4rem, 1fr));
-    margin: 0 -0.8rem 0 0.8rem;
-  `}
+  flex: 1;
+  grid-template-columns: repeat(auto-fit, minmax(6.4rem, 1fr));
+  margin: 0 -0.8rem 0 0.8rem;
+  @media (max-width: 940px) {
+    margin: 0;
+  }
 `;
 
 export const ProductCard = styled(AnimatedCard)`

@@ -28,10 +28,11 @@ export const AnimatedContainer = styled(motion.div)`
 `;
 
 export const Navigation = styled.nav`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  grid-gap: 0.8rem;
+  ${() => css`
+    display: grid;
+    grid-template-columns: repeat(6, minmax(10.4rem, 1fr));
+    column-gap: 0.8rem;
+  `}
 `;
 
 export const AnimatedCard = styled(motion.button)`
