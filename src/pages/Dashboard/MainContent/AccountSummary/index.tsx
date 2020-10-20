@@ -18,22 +18,35 @@ import {
   CustomTooltip,
 } from './styles';
 import Button from '../../../../components/Button';
+import useAuth from '../../../../contexts/auth';
 import CreditCardIllustration from '../../../../assets/images/illustrations/card-illustration.png';
 import { PlataformaPaiIcon } from '../../../../assets/images/icons';
+import {
+  generateStatements,
+  generateInvestments,
+  formatCurrency,
+} from '../../../../utils';
 
 type ChartValue = number | React.ReactText | undefined;
 
 const formatChartValue = (value: ChartValue): string => `${value || 0}%`;
 
+const hiddenStatements = generateStatements(false);
+const hiddenInvestments = generateInvestments(false).timeline;
+
 const AccountSummary: React.FC = () => {
+  const { statements, investments } = useAuth().account;
   const [displayStatement, setDisplayStatement] = useState(true);
   const [displayInvestments, setDisplayInvestments] = useState(true);
 
+  const currentMonth = statements?.[statements.length - 1];
+
   const investmentGrowth = useMemo(() => {
-    const [investments] = lineChartData;
-    const { y } = investments.data[investments.data.length - 1];
+    const { data: investmentsData } = investments.timeline[0];
+    const { y } = investmentsData[investmentsData.length - 1];
+
     return formatChartValue(y);
-  }, []);
+  }, [investments]);
 
   const { colors } = useTheme();
 
@@ -54,7 +67,7 @@ const AccountSummary: React.FC = () => {
         <DataWrapper>
           <LeftData>
             <ResponsiveBar
-              data={barChartData}
+              data={displayStatement ? statements : hiddenStatements}
               indexBy="month"
               keys={['outcome', 'income']}
               colors={({ id, data }) => data[`${id}Color`]}
@@ -75,8 +88,13 @@ const AccountSummary: React.FC = () => {
                     : i18n.t('account.expenses');
                 const value = chart.data[chart.id];
                 return (
-                  <CustomTooltip rightArrow>
-                    {`${label}: R$${value}`}
+                  <CustomTooltip
+                    rightArrow={chart.index >= 3}
+                    leftArrow={chart.index < 3}
+                  >
+                    {`${label}: ${formatCurrency(+value)
+                      .replace(' ', '')
+                      .replace('-', '')}`}
                   </CustomTooltip>
                 );
               }}
@@ -103,11 +121,13 @@ const AccountSummary: React.FC = () => {
           <RightData>
             <span>{i18n.t('account.revenue')}</span>
             <DataValue income>
-              {displayStatement ? 'R$ 8.552,22' : '---'}
+              {displayStatement ? formatCurrency(currentMonth?.income) : '---'}
             </DataValue>
             <span>{i18n.t('account.expenses')}</span>
             <DataValue outcome>
-              {displayStatement ? 'R$ 7.948,55' : '---'}
+              {displayStatement
+                ? formatCurrency(currentMonth?.outcome).replace('-', '')
+                : '---'}
             </DataValue>
           </RightData>
         </DataWrapper>
@@ -146,7 +166,9 @@ const AccountSummary: React.FC = () => {
           <LeftData>
             {' '}
             <ResponsiveLine
-              data={lineChartData}
+              data={
+                displayInvestments ? investments.timeline : hiddenInvestments
+              }
               useMesh
               enableArea
               enableCrosshair={false}
@@ -187,7 +209,9 @@ const AccountSummary: React.FC = () => {
           </LeftData>
           <RightData>
             <span>{i18n.t('investments.investedCapital')}</span>
-            <DataValue>{displayInvestments ? 'R$ 5.750,00' : '---'}</DataValue>
+            <DataValue>
+              {displayInvestments ? investments.amount : '---'}
+            </DataValue>
             <span>{i18n.t('investments.monthPerfomance')}</span>
             <DataValue>
               {displayInvestments ? investmentGrowth : '---'}
