@@ -117,8 +117,13 @@ export const DataValue = styled.div<DataValueType>`
   `}
 `;
 
-export const CustomTooltip = styled.div<{ rightArrow?: boolean }>`
-  ${({ theme, rightArrow }) => css`
+export type CustomTooltipProps = {
+  rightArrow?: boolean;
+  leftArrow?: boolean;
+};
+
+export const CustomTooltip = styled.div<CustomTooltipProps>`
+  ${({ theme, rightArrow, leftArrow }) => css`
     background: ${theme.colors.lightGrey};
     padding: 0.4rem 0.8rem;
     border-radius: ${theme.radii.small};
@@ -130,15 +135,18 @@ export const CustomTooltip = styled.div<{ rightArrow?: boolean }>`
       content: '';
       display: block;
       height: 0;
-      left: ${rightArrow ? `100%` : `50%`};
+      left: ${rightArrow ? `100%` : (leftArrow && `2%`) || `50%`};
       bottom: -50%;
       position: absolute;
       transform: ${rightArrow
         ? `translate3d(0, -175%, 0)`
-        : `translate3d(-50%, 25%, 0)`};
+        : (leftArrow && `translate3d(-100%, -175%, 0)`) ||
+          `translate3d(-50%, 25%, 0)`};
       border-color: ${rightArrow
         ? `transparent transparent transparent ${theme.colors.lightGrey}`
-        : `${theme.colors.lightGrey} transparent transparent
+        : (leftArrow &&
+            `transparent ${theme.colors.lightGrey} transparent transparent`) ||
+          `${theme.colors.lightGrey} transparent transparent
         transparent`};
       border-style: solid;
       border-width: 0.8rem;
