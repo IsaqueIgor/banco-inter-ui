@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
+import { motion } from 'framer-motion';
 
 import { Wrapper as HeaderWrapper } from '../Header/styles';
 
-export const Container = styled.footer`
-  ${() => css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  `}
+export const AnimatedContainer = styled(motion.footer)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 3.2rem;
+  transform-origin: bottom;
 `;
 
 export const Wrapper = styled(HeaderWrapper)`
@@ -32,12 +33,19 @@ export const Wrapper = styled(HeaderWrapper)`
     > img {
       margin-top: 1.6rem;
     }
+
+    @media (max-width: 568px) {
+      flex-direction: column;
+      text-align: center;
+    }
   `}
 `;
 
-export const FooterSection = styled(Container)<{ background?: string }>`
+export const FooterSection = styled(AnimatedContainer)<{ background?: string }>`
   ${({ theme, background }) => css`
     background: ${background || transparentize(0.92, theme.colors.grey)};
+    margin-top: 0;
+
     :last-of-type {
       ${Wrapper} {
         padding: 2.4rem 0;
