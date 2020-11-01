@@ -9,22 +9,28 @@ import {
 import { BancoInter } from '../../assets/images';
 import Button from '../Button';
 import AccountDropdown from './AccountDropdown';
-import { User } from './Header';
+import useAuth from '../../contexts/auth';
 import Gradient from './Gradient';
+import { CONTAINER_ANIMATION, NAVS_ANIMATION } from './animations';
 
 const Header: React.FC = () => {
-  const user: User = { name: 'Isaque Igor' };
+  const { signOut } = useAuth();
 
   return (
-    <AnimatedContainer>
+    <AnimatedContainer
+      variants={CONTAINER_ANIMATION}
+      initial="unMounted"
+      animate="mounted"
+      exit="unMounted"
+    >
       <Wrapper>
-        <AnimatedLeftNav>
+        <AnimatedLeftNav variants={NAVS_ANIMATION}>
           <BancoInter />
           Internet Banking
         </AnimatedLeftNav>
-        <AnimatedRightNav>
+        <AnimatedRightNav variants={NAVS_ANIMATION}>
           <Button variant="secondary">Simulador Renda Fixa</Button>
-          <AccountDropdown user={user} />
+          <AccountDropdown />
         </AnimatedRightNav>
       </Wrapper>
       <Gradient />

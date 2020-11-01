@@ -14,11 +14,7 @@ import useEventListener from '../../../hooks/useEventListener';
 
 const removeHashFromColor = (color: string): string => color.slice(1);
 
-type AccountDropdownProps = {
-  user: User;
-};
-
-const AccountDropdown: React.FC<AccountDropdownProps> = ({ user }) => {
+const AccountDropdown: React.FC = () => {
   const history = useHistory();
   const { account, signOut } = useAuth();
   const { lightGrey, secondary } = useTheme().colors;

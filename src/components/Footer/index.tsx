@@ -2,14 +2,20 @@ import React from 'react';
 
 import { useTheme } from 'styled-components';
 
-import { Container, FooterSection, Wrapper } from './styles';
+import { AnimatedContainer, FooterSection, Wrapper } from './styles';
+import { CONTAINER_ANIMATION } from './animations';
 import NortonLogo from '../../assets/images/illustrations/norton-secured.svg';
 
 const Footer: React.FC = () => {
   const { colors } = useTheme();
 
   return (
-    <Container>
+    <AnimatedContainer
+      variants={CONTAINER_ANIMATION}
+      initial="unMounted"
+      animate="mounted"
+      exit="unMounted"
+    >
       <FooterSection as="section">
         <Wrapper>
           <div>
@@ -40,7 +46,7 @@ const Footer: React.FC = () => {
           />
         </Wrapper>
       </FooterSection>
-    </Container>
+    </AnimatedContainer>
   );
 };
 
